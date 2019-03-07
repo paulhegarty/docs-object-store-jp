@@ -1,0 +1,6 @@
+.xref:index.adoc[Object Store v2]
+* xref:index.adoc[Object Store v2 の概要]
+* xref:osv2-guide.adoc[Object Store v2 の使用]
+* xref:osv2-tutorial.adoc[チュートリアル: Object Store v2]
+* xref:osv2-apis.adoc[REST API: Object Store v2]
+* xref:osv2-faq.adoc[Object Store に関する FAQ]
