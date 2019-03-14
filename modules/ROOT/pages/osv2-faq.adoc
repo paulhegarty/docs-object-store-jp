@@ -35,7 +35,7 @@ Object Store v2 では、アプリケーションごとのキー数に制限は�
 
 == Object Store v2 REST API ポータルの場所は?
 
-この API は、https://anypoint.mulesoft.com/exchange/portals/anypoint-platform/f1e97bc6-315a-4490-82a7-23abe036327a.anypoint-platform/object-store-v2/[Anypoint Platform Developer のポータル]で使用できます。
+この API は、 https://anypoint.mulesoft.com/exchange/portals/anypoint-platform/f1e97bc6-315a-4490-82a7-23abe036327a.anypoint-platform/object-store-v2/[Anypoint Platform Developer のポータル]で使用できます。
 
 == Object Store Connector の場所は?
 
@@ -50,7 +50,7 @@ Mule の Object Store Connector は、すべてのバージョンが Object Stor
 Runtime Manager で Object Store キーを表示すると、キーは `[binary value] BINARY` として表示されます。
 Mule 4 では、値を Mule オブジェクトでラップして、Anypoint Platform で値がバイナリでのみ表示されるようにします。バックグラウンドでは、Mule 4 が Mule 内部シリアライザでバイナリ逐次化を実行します。ユーザインターフェースではオブジェクトを非逐次化できないため、値がバイナリになったことのみが伝えられます。
 
-キー値を表示するには、アプリケーションのコネクタに次のような Object Store 取得フローがｐ；ｐ必要です。
+キー値を表示するには、アプリケーションのコネクタに次のような Object Store 取得フローが必要です。
 
 [source,xml,linenums]
 ----
