@@ -3,19 +3,19 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-このドキュメントでは、手順に沿って Object Store v2 (OSv2) を使用してデータを保存および表示できるようにします。
+このドキュメントでは、手順に沿って Object Store v2 を使用してデータを保存および表示できるようにします。
 
 == 前提条件
 
-このドキュメントは、読者が Anypoint Studio、コマンドラインからの curl の使用、Anypoint Platform と Runtime Manager の使用に精通していることを前提としています。コンピュータに curl がインストールされていることを確認してください。Mac または Linux を使用している場合、curl コマンドは組み込まれています。Windows の場合、curl をダウンロードしてインストールしてください。または、curl の代わりに Postman などのブラウザプラグインを使用できます。
+このドキュメントは、読者が Anypoint Studio、コマンドラインからの ​`curl`​ の使用、Anypoint Platform と Runtime Manager の使用に精通していることを前提としています。コンピュータに curl がインストールされていることを確認してください。Mac または Linux を使用している場合、curl コマンドは組み込まれています。Windows の場合、curl をダウンロードしてインストールしてください。または、curl の代わりに Postman などのブラウザプラグインを使用できます。
 
-Anypoint Platform の *[Access Management (アクセス管理)] > [Environments (環境)]* 環境で Design (設計) 環境が設定されていることも必要です。*[Access Management (アクセス管理)]* が表示されない場合は、サイト管理者にお問い合わせください。
+Anypoint Platform の ​*[Access Management (アクセス管理)] > [Environments (環境)]*​ 環境で Design (設計) 環境が設定されていることも必要です。​*[Access Management (アクセス管理)]*​ が表示されない場合は、サイト管理者にお問い合わせください。
 
 == Object Store Connector をインストールする
 
-. Anypoint Studio で、Studio タスクバーの *[Exchange]* アイコンをクリックします。
-. Anypoint Exchange で *[Login (ログイン)]* をクリックします。
-. `objectstore` コネクタを検索して *[Install (インストール)]* をクリックします。
+. Anypoint Studio で、Studio タスクバーの ​*[Exchange]*​ アイコンをクリックします。
+. Anypoint Exchange で ​*[Login (ログイン)]*​ をクリックします。
+. ​`objectstore`​ コネクタを検索して ​*[Install (インストール)]*​ をクリックします。
 . プロンプトに従ってコネクタをインストールします。
 
 == Design Center アプリケーションを作成する
@@ -26,19 +26,19 @@ IMPORTANT: Design Center を使用する前に、ブラウザで LastPass や Ok
 
 === アプリケーションを設定して実行する
 
-. Anypoint Studio で、*[Design Center] > [Create (作成)] > [Mule Application (Mule アプリケーション)]* をクリックします。
-. プロジェクト名を指定します(`osv2` など)。
-. *[Let's Get Started (はじめよう)]* ウィザードで、*[Go straight to canvas (キャンバスに直接移動)]* をクリックします。
-. [Trigger (トリガ)] で、*[HTTP Listener (HTTP リスナ)]* を選択します。
+. Anypoint Studio で、​*[Design Center] > [Create (作成)] > [Mule Application (Mule アプリケーション)]*​ をクリックします。
+. プロジェクト名を指定します(​`osv2`​ など)。
+. ​*[Let's Get Started (はじめよう)]*​ ウィザードで、​*[Go straight to canvas (キャンバスに直接移動)]*​ をクリックします。
+. [Trigger (トリガ)] で、​*[HTTP Listener (HTTP リスナ)]*​ を選択します。
 +
 image::os-dc-http-trigger.png[]
 +
-. *[Path (パス)]* に「`/store`」を指定します。
-. *[Edit (編集)]* をクリックします。
+. ​*[Path (パス)]*​ に「​`/store`​」を指定します。
+. ​*[Edit (編集)]*​ をクリックします。
 +
 image::os-dc-http-edit.png[]
 +
-. *[Save (保存)]* をクリックします。デフォルト設定を使用できます。
+. ​*[Save (保存)]*​ をクリックします。デフォルト設定を使用できます。
 +
 image::os-dc-http-settings.png[]
 +
@@ -46,23 +46,21 @@ image::os-dc-http-settings.png[]
 +
 image::os-dc-plus-sign.png[]
 +
-. *[Select a component (コンポーネントを選択)]* ウィンドウで、「*Obj*」を検索し、*[ObjectStore Connector]* を選択して、 
-*[Store (保存)]* 操作をクリックします。
+. ​*[Select a component (コンポーネントを選択)]*​ ウィンドウで、「​*Obj*​」を検索し、​*[ObjectStore Connector]*​ をクリックして、​*[Store]*​ 操作をクリックします。
 +
 image::os-dc-os-store-op.png[]
 +
-. *[Key (キー)]* に「`#[payload.key]`」、*[Value (値)]*に「`payload.value`」文字列を指定します。
+. ​*[Key (キー)]*​ に「​`#[payload.key]`​」、​*[Value (値)]*​に「​`payload.value`​」文字列を指定します。
 +
 image::os-dc-store-setup.png[]
 +
-. Design Center ウィンドウの上部にある *[Run (実行)]* ボタンをクリックします。正常に開始すると、*[Running (実行中)]* が表示されます。
+. Design Center ウィンドウの上部にある ​*[Run (実行)]*​ ボタンをクリックします。正常に開始すると、​*[Running (実行中)]*​ が表示されます。
 +
 image::os-dc-run-button.png[]
 +
-. *[Run (実行)]* ボタンの右には 3 つのドットが縦に並んでいます。このドットをクリックし、*[Copy link (リンクをコピー)]* をクリックします。
+. ​*[Run (実行)]*​ ボタンの右には 3 つのドットが縦に並んでいます。このドットをクリックし、​*[Copy link (リンクをコピー)]*​ をクリックします。
 
-これで、アプリケーションの最初の部分が作成されました。次のタスクでアプリケーションをテストするために、Design Center アプリケーションは実行中のままにしておきます。Design Center ウィンドウがタイムアウトしても、ログオンしている間、アプリケーションは実行を続行します。*[Projects (プロジェクト)]* 画面でアプリケーションをクリックして、
-*[Status Running (状況 実行中)]* を確認できます。
+これで、アプリケーションの最初の部分が作成されました。次のタスクでアプリケーションをテストするために、Design Center アプリケーションは実行中のままにしておきます。Design Center ウィンドウがタイムアウトしても、ログオンしている間、アプリケーションは実行を続行します。​*[Projects (プロジェクト)]*​ 画面でアプリケーションをクリックし、​*[Status Running (状況 実行中)]*​ を探します。
 
 === Design Center アプリケーションをテストする
 
@@ -73,7 +71,7 @@ image::os-dc-run-button.png[]
 curl -X POST -H "Content-Type: application/json" -d '{ "key": "MyKey", "value": "OSv2 Test" }' "http://LINK_FROM_DESIGN_CENTER/store"
 ----
 +
-. `LINK_FROM_DESIGN_CENTER` を、Design Center からコピーしたリンクに置き換え、Enter キーを押してコマンドを Design Center に送信します。
+. ​`LINK_FROM_DESIGN_CENTER`​ を、Design Center からコピーしたリンクに置き換え、Enter キーを押してコマンドを Design Center に送信します。
 +
 出力が次のようにエコー表示されます。
 +
@@ -82,48 +80,45 @@ curl -X POST -H "Content-Type: application/json" -d '{ "key": "MyKey", "value": 
 { "key": "MyKey", "value": "OSv2 Test" }
 ----
 +
-. Anypoint Platform で、左上のメニューアイコンをクリックし、*[Runtime Manager]* をクリックします。
-. アプリケーションのリストでエントリがどう作成されたかを確認します。 
-. アプリケーションの詳細を表示するには、[Server (サーバ)] 列で *[CloudHub]* をクリックし、 
-*[Manage Application (アプリケーションを管理)]* をクリックします。
+. Anypoint Platform で、左上のメニューアイコンをクリックし、​*[Runtime Manager]*​ をクリックします。
+. アプリケーションのリストでエントリがどう作成されたかを確認します。
+. アプリケーションの [Server (サーバ)] 列で ​*[CloudHub]*​ をクリックして詳細を表示し、​*[Manage Application (アプリケーションを管理)]*​ をクリックします。
 +
 image::os-rm-manage-app.png[]
 +
-. *[Object Store]* をクリックし、続いてオブジェクトストア、パーティション、キーの順にクリックします。値が 
-`[binary value] BINARY` として表示されます。 
+. ​*[Object Store]*​ をクリックし、続いてオブジェクトストア、パーティション、キーの順にクリックします。値は ​`[binary value] BINARY`​ として表示されます。
 
-`MyKey` が Object Store ユーザインターフェースに表示され、キーを Design Center アプリケーション経由で送信してオブジェクトストアに保存できることを示します。
+​`MyKey`​ が Object Store ユーザインターフェースに表示され、キーを Design Center アプリケーション経由で送信してオブジェクトストアに保存できることを示します。
 
-この値はバイナリです。これは、Mule 4 では値を Mule オブジェクトでラップして、Anypoint Platform で値がバイナリでのみ表示されるようにするためです。バックグラウンドでは、Mule 4 が Mule 内部シリアライザでバイナリ逐次化を実行します。ユーザインターフェースではオブジェクトを非逐次化できないため、値がバイナリになったことのみが伝えられます。 
+この値はバイナリです。これは、Mule 4 では値を Mule オブジェクトでラップして、Anypoint Platform で値がバイナリでのみ表示されるようにするためです。バックグラウンドでは、Mule 4 が Mule 内部シリアライザでバイナリ逐次化を実行します。ユーザインターフェースではオブジェクトを非逐次化できないため、値がバイナリになったことのみが伝えられます。
 
 値が機能することも検証するには、Design Center に戻り、値を取得する新しいフローを追加します。
 
 === 値を取得する
 
-. メニューアイコンをクリックし、*[Design Center]* をクリックします。
-. Design Center で、プロジェクトをクリックし、*[Open (開く)]* をクリックします。
-. プロジェクトの左にある長方形のボックスアイコンを開いて、*[Flow (フロー)]* メニューを展開します。
-. 最初に、縦ドットアイコンをクリックし、メニューから *[Rename (名前変更)]* をクリックして、
-既存のフローの名前を変更します。`New Flow` を `Store` に変更します。
+. メニューアイコンをクリックし、​*[Design Center]*​ をクリックします。
+. Design Center で、プロジェクトをクリックし、​*[Open (開く)]*​ をクリックします。
+. プロジェクトの左にある長方形のボックスアイコンを開いて、​*[Flow (フロー)]*​ メニューを展開します。
+. 最初に、縦ドットアイコンをクリックし、メニューから ​*[Rename (名前変更)]*​ をクリックして、既存のフローの名前を変更します。​`New Flow`​ を ​`Store`​ に変更します。
 +
 image::os-dc-flows.png[]
 +
-. *[Flows (フロー)]* の右にあるプラス記号をクリックします。
-. *[Go straight to canvas (キャンバスに直接移動)]* をクリックしてウィザードを終了します。
-. [Trigger (トリガ)] メニューで、*[HTTP Listener (HTTP リスナ)]* を選択します。
-. *[Path (パス)]* に「`/retrieve`」値を指定します。
+. ​*[Flows (フロー)]*​ の右にあるプラス記号をクリックします。
+. ​*[Go straight to canvas (キャンバスに直接移動)]*​ をクリックしてウィザードを終了します。
+. [Trigger (トリガ)] メニューで、​*[HTTP Listener (HTTP リスナ)]*​ を選択します。
+. ​*[Path (パス)]*​ に「​`/retrieve`​」値を指定します。
 +
 image:os-dc-http-retrieve.png[]
 +
-[HTTP Listener (HTTP リスナ)] のデフォルト設定は適切であるため、[Edit (編集)] をクリックする必要はありません。 
-ただし、*[Host (ホスト)]* が `0.0.0.0` で、*[Port (ポート)]* が `8081` であることを確認できます。これらの値は、前の `Store` フローと同じです。
+[HTTP Listener (HTTP リスナ)] のデフォルト設定は適切であるため、[Edit (編集)] をクリックする必要はありません。
+ただし、​*[Host (ホスト)]*​ が ​`0.0.0.0`​ で、​*[Port (ポート)]*​ が ​`8081`​ であることを確認できます。これらの値は、前の ​`Store`​ フローと同じです。
 +
-. フローを開始したので、名前を「`Retrieve`」に変更します。
+. フローを開始したので、名前を「​`Retrieve`​」に変更します。
 . [HTTP Listener (HTTP リスナ)] の横にあるプラス記号をクリックしてコンポーネントを追加します。
-. *[Select a component (コンポーネントを選択)]* で、「`Obj`」を検索し、*[ObjectStore Connector]* をクリックします。
-. *[Retrieve (取得)]* 操作をクリックし、*[Key (キー)]* 項目に「`#[attributes.queryParams.key]`」値を指定します。
+. ​*[Select a component (コンポーネントを選択)]*​ で、「​`Obj`​」を検索し、​*[ObjectStore Connector]*​ をクリックします。
+. ​*[Retrieve (取得)]*​ 操作をクリックし、​*[Key (キー)]*​ 項目に「​`#[attributes.queryParams.key]`​」値を指定します。
 
-これで *[Retrieve (取得)]* フローは完成です。*[Run (実行)]* を再度クリックしてアプリケーションを再起動します。
+これで ​*[Retrieve (取得)]*​ フローは完成です。​*[Run (実行)]*​ を再度クリックしてアプリケーションを再起動します。
 
 コマンドラインで、次のように curl コマンドを送信してキーの値を表示します。
 
@@ -132,9 +127,9 @@ image:os-dc-http-retrieve.png[]
 curl http://LINK_FROM_DESIGN_CENTER/retrieve?key=MyKey;echo
 ----
 
-`LINK_FROM_DESIGN_CENTER` を Design Center の cloudhub.io リンクに置き換えます。
+​`LINK_FROM_DESIGN_CENTER`​ を Design Center の cloudhub.io リンクに置き換えます。
 
-(コマンドの最後にある `;echo` ステートメントで出力が読みやすくなります)。
+(コマンドの最後にある ​`;echo`​ ステートメントで出力が読みやすくなります)。
 
 このコマンドの出力では、キーの値がリストされます。
 
@@ -145,7 +140,7 @@ curl http://LINK_FROM_DESIGN_CENTER/retrieve?key=MyKey;echo
 
 この演習では、Design Center で作成したオブジェクトストアに curl コマンドを使用してアクセスできること、キーが Runtime Manager に表示されることを確認しました。
 
-オブジェクトストアを更新するたびに Runtime Manager インターフェースを表示する必要はありません。OSv2 Connector にリンクするアプリケーションを作成したら、curl コマンドでキーと値をオブジェクトストアに保存して結果を別の curl コマンドで表示できます。必要に応じてキーや値を変更してください。
+オブジェクトストアを更新するたびに Runtime Manager インターフェースを表示する必要はありません。Object Store v2 Connector にリンクするアプリケーションを作成したら、curl コマンドでキーと値をオブジェクトストアに保存して結果を別の curl コマンドで表示できます。必要に応じてキーや値を変更してください。
 
 Store (保存):
 
@@ -161,63 +156,59 @@ Retrieve (取得):
 curl http://LINK_FROM_DESIGN_CENTER/retrieve?key=MyKey
 ----
 
-各コマンドの `LINK_FROM_DESIGN_CENTER` を Design Center の cloudhub.io リンクに置き換えます。
+各コマンドの ​`LINK_FROM_DESIGN_CENTER`​ を Design Center の cloudhub.io リンクに置き換えます。
 
-プログラムによる Object Store アクセスへの移行についての詳細は、https://www.mulesoft.org/docs/site/3.9.0/apidocs/org/mule/api/store/ObjectStore.html[ObjectStore API のドキュメント]を参照してください。OSv2 の強みの 1 つは、OSv1 で動作するプログラミング技法が OSv2 でも動作することです。
+プログラムによる Object Store アクセスへの移行についての詳細は、&#8203;https://www.mulesoft.org/docs/site/3.9.0/apidocs/org/mule/api/store/ObjectStore.html[Object Store API のドキュメント] を参照してください。
+Object Store v1 で動作するプログラミング技法は Object Store v2 でも動作します。
 
 == Studio 7 プロジェクトを作成する
 
-. Anypoint Studio で、*[File (ファイル)] > [New (新規)] > [Mule Project (Mule プロジェクト)]* をクリックし、プロジェクトの名前を指定します (`osv2` など)。
+. Anypoint Studio で、​*[File (ファイル)] > [New (新規)] > [Mule Project (Mule プロジェクト)]*​ をクリックし、プロジェクトの名前を指定します (​`osv2`​ など)。
 . Studio タスクバーの左上にある [Exchange X] アイコンをクリックします。
-. Exchange ウィンドウで、*[Login (ログイン)]* をクリックし、Anypoint Platform のユーザ名とパスワードを指定します。
-. Mule 4 の Object Store Connector を検索します。「obj」など文字列の一部を入力すると、 
+. Exchange ウィンドウで、​*[Login (ログイン)]*​ をクリックし、Anypoint Platform のユーザ名とパスワードを指定します。
+. Mule 4 の Object Store Connector を検索します。「obj」など文字列の一部を入力すると、
 Exchange で適切なアセットが検索されます。
-. [ObjectStore Connector for Mule 4 Exchange] アセットをクリックし、右上で *[Add to project (プロジェクトに追加)]* をクリックします。確認プロンプトで *[Proceed (続行)]* をクリックします。
-. Studio の [Mule Palette (Mule パレット)] で [HTTP] をクリックします。*[Listener (リスナ)]* をクリックしてキャンバスにドラッグします。
+. [ObjectStore Connector for Mule 4 Exchange] アセットをクリックし、右上で ​*[Add to project (プロジェクトに追加)]*​ をクリックします。確認プロンプトで ​*[Proceed (続行)]*​ をクリックします。
+. Studio の [Mule Palette (Mule パレット)] で [HTTP] をクリックします。​*[Listener (リスナ)]*​ をクリックしてキャンバスにドラッグします。
 +
 image::os-as-drag-listener.png[]
 +
-. *[Connector configuration (コネクタ設定)]* 項目の右にある緑のプラス記号をクリックし、
-[Host (ホスト)] を「0.0.0.0」、[Port (ポート)] を「8081」に設定します。
+. ​*[Connector configuration (コネクタ設定)]*​ 項目の右にある緑のプラス記号をクリックし、[Host (ホスト)] を「0.0.0.0」、[Port (ポート)] を「8081」に設定します。
 +
 image::os-as-http-listener-config.png[]
 +
-. コネクタのメイン画面で、*[Path (パス)]* を「`/store`」に設定します。
+. コネクタのメイン画面で、​*[Path (パス)]*​ を「​`/store`​」に設定します。
 +
 image::os-as-http-path.png[]
 +
-. [Mule Palette (Mule パレット)] で *[ObjectStore]* をクリックし、*[Store (保存)]* 操作をキャンバスにドラッグします。
-. [Key (キー)] に「`#[payload.key]`」、[Value (値)]に「`payload.value`」文字列を指定します。
+. [Mule Palette (Mule パレット)] で ​*[ObjectStore]*​ をクリックし、​*[Store (保存)]*​ 操作をキャンバスにドラッグします。
+. [Key (キー)] に「​`#[payload.key]`​」、[Value (値)]に「​`payload.value`​」文字列を指定します。
 . [Object Store] 項目の右にある緑のプラス記号をクリックし、
 [Global Element Properties (グローバル要素のプロパティ)] 画面で、[OK] をクリックしてデフォルトを受け入れます。
-. [HTTP Listener (HTTP リスナ)] を再度クリックしてキャンバスの最初の行の下にドラッグし、
-2 つ目のフローを作成します。ステップ 7 と同じ設定を使用します。メイン画面で、*[Path (パス)]* を「`retrieve`」に設定します。
+. [HTTP Listener (HTTP リスナ)] を再度クリックしてキャンバスの最初の行の下にドラッグし、2 つ目のフローを作成します。ステップ 7 と同じ設定を使用します。メイン画面で、​*[Path (パス)]*​ を「​`retrieve`​」に設定します。
 +
 image::os-as-2nd-flow-http.png[]
 +
-. [Mule Palette (Mule パレット)] で [ObjectStore] をクリックし、*[Retrieve (取得)]* 操作をキャンバスにドラッグします。
-. *[Key (キー)]* 項目を `#[attributes.queryParams.key]` に設定します。
-. *[Object Store]* 項目の右にある緑のプラス記号をクリックし、*[Global
-Element Properties (グローバル要素のプロパティ)]* 画面で、*[OK] をクリックしてデフォルトを受け入れます。
-. フローの表示ラベルを変更するには、ダブルクリックします。最初の行を
-「`Store`」、2 番目の行を「`Retrieve`」に変更します。
+. [Mule Palette (Mule パレット)] で [ObjectStore] をクリックし、​*[Retrieve (取得)]*​ 操作をキャンバスにドラッグします。
+. ​*[Key (キー)]*​ 項目を ​`#[attributes.queryParams.key]`​ に設定します。
+. ​*[Object Store]*​ 項目の右にある緑のプラス記号をクリックし、*[Global
+Element Properties (グローバル要素のプロパティ)]​* 画面で、*​[OK]* をクリックしてデフォルトを受け入れます。
+. フローの表示ラベルを変更するには、ダブルクリックします。最初のフローを「​`Store`​」、2 つ目のフローを「​`Retrieve`​」に変更します。
 +
 完了すると、フローが次のように表示されます。
 +
 image::os-as-finished-flows.png[]
 
-これで、Studio アプリケーションが完成しました。正しく実行されることをテストするには、*[Run As (別のユーザとして実行)] > [Mule Application (Mule アプリケーション)]* をクリックします。これは単なるテストです。アプリケーションが実行を開始したら、停止してかまいません。
+これで、Studio アプリケーションが完成しました。正しく実行されることをテストするには、​*[Run As (別のユーザとして実行)] > [Mule Application (Mule アプリケーション)]*​ をクリックします。これは単なるテストです。アプリケーションが実行を開始したら、停止してかまいません。
 
 === Studio 7 アプリケーションをテストする
 
 . Studio の Package Explorer でプロジェクトを右クリックします。
-. *[Anypoint Platform]* > *[Deploy to CloudHub (CloudHub にデプロイ)]* をクリックします。注意: CloudHub はサーバの名前ですが、
-Anypoint Platform *Runtime Manager* でアプリケーションにアクセスできます。
+. ​*[Anypoint Platform]*​ > ​*[Deploy to CloudHub (CloudHub にデプロイ)]*​ をクリックします。注意: CloudHub はサーバの名前ですが、Anypoint Platform ​*Runtime Manager*​ でアプリケーションにアクセスできます。
 +
 image::os-as-deploy-to-cloudhub.png[]
 +
-. Anypoint Platform *Runtime Manager* でアプリケーションが表示されたら、起動して、
-実行中にします。cloudhub.io URL をメモします。
+. Anypoint Platform ​*Runtime Manager*​ でアプリケーションが表示されたら、起動して、実行中にします。cloudhub.io URL をメモします。
 . コマンドラインから、次の curl コマンドを入力します。
 +
 [source,console]
@@ -225,18 +216,17 @@ image::os-as-deploy-to-cloudhub.png[]
 $ curl -X POST -H "Content-Type: application/json" -d '{ "key": "MyKey", "value": "OSv2 Test" }' "http://LINK_FROM_RUNTIME_MANAGER/store"
 ----
 +
-`LINK_FROM_RUNTIME_MANAGER` を Runtime Manager のアプリケーションの cloudhub.io URL に置き換えます。
+​`LINK_FROM_RUNTIME_MANAGER`​ を Runtime Manager のアプリケーションの cloudhub.io URL に置き換えます。
 +
-このコマンドの最後に `;echo` を追加すると、コマンドを読みやすくできます。
+このコマンドの最後に ​`;echo`​ を追加すると、コマンドを読みやすくできます。
 +
-. Runtime Manager で、アプリケーションの *[Server (サーバ)]* 列で *[CloudHub]* をクリックして詳細を表示し、*[Manage Application (アプリケーションを管理)]* をクリックします。
+. Runtime Manager で、アプリケーションの ​*[Server (サーバ)]*​ 列で ​*[CloudHub]*​ をクリックして詳細を表示し、​*[Manage Application (アプリケーションを管理)]*​ をクリックします。
 +
 image::os-rm-manage-app.png[]
 +
-. *[Object Store]* をクリックし、オブジェクトストア、パーティション、キーの順に選択して表示します。値が
-`[binary value] BINARY` として表示されます。 
+. ​*[Object Store]*​ をクリックし、オブジェクトストア、パーティション、キーの順に選択して表示します。値は ​`[binary value] BINARY`​ として表示されます。
 +
-`MyKey` が Object Store v2 ユーザインターフェースに表示され、キーを Design Center アプリケーション経由で送信してオブジェクトストアに保存できることを示します。
+​`MyKey`​ が Object Store v2 ユーザインターフェースに表示され、キーを Design Center アプリケーション経由で送信してオブジェクトストアに保存できることを示します。
 +
 . キーの値を表示するには、次の curl コマンドを使用します。
 +
@@ -262,48 +252,48 @@ Studio アプリケーションの XML は次のようになります。この�
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:os="http://www.mulesoft.org/schema/mule/os" 
+<mule xmlns:os="http://www.mulesoft.org/schema/mule/os"
 	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
 	xmlns:http="http://www.mulesoft.org/schema/mule/http"
-	xmlns="http://www.mulesoft.org/schema/mule/core" 
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core 
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core
 	http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.mulesoft.org/schema/mule/http 
+http://www.mulesoft.org/schema/mule/http
 http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
-http://www.mulesoft.org/schema/mule/ee/core 
+http://www.mulesoft.org/schema/mule/ee/core
 http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
-http://www.mulesoft.org/schema/mule/os 
+http://www.mulesoft.org/schema/mule/os
 http://www.mulesoft.org/schema/mule/os/current/mule-os.xsd">
-	<http:listener-config name="HTTP_Listener_config" 
+	<http:listener-config name="HTTP_Listener_config"
 		doc:name="HTTP Listener config">
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
 	<os:object-store name="Object_store" doc:name="Object store" />
-	<http:listener-config name="HTTP_Listener_config1" 
+	<http:listener-config name="HTTP_Listener_config1"
 		doc:name="HTTP Listener config">
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
 	<os:object-store name="Object_store1" doc:name="Object store" />
 	<flow name="Store" >
-		<http:listener doc:name="Listener" config-ref="HTTP_Listener_config" 
+		<http:listener doc:name="Listener" config-ref="HTTP_Listener_config"
 			path="/store">
 			<ee:repeatable-file-store-stream />
 		</http:listener>
-		<os:store doc:name="Store" 
-			key="#[payload.key]" 
+		<os:store doc:name="Store"
+			key="#[payload.key]"
 			objectStore="Object_store">
 			<os:value ><![CDATA[payload.value]]></os:value>
 		</os:store>
 	</flow>
 	<flow name="Retrieve" >
-		<http:listener doc:name="Listener" config-ref="HTTP_Listener_config1" 
+		<http:listener doc:name="Listener" config-ref="HTTP_Listener_config1"
 			path="/retrieve">
 			<ee:repeatable-file-store-stream />
 		</http:listener>
-		<os:retrieve doc:name="Retrieve" 
-			key="#[attributes.queryParams.key]" 
+		<os:retrieve doc:name="Retrieve"
+			key="#[attributes.queryParams.key]"
 			objectStore="Object_store1"/>
 	</flow>
 </mule>
@@ -313,72 +303,69 @@ http://www.mulesoft.org/schema/mule/os/current/mule-os.xsd">
 
 Anypoint Platform 7 のみを使用している場合、このセクションは省略してください。
 
-. 新しいプロジェクトを作成するには、Anypoint Studio を開き、*[File (ファイル)] > [New (新規)] > [Mule Project (Mule プロジェクト)]* をクリックします。このチュートリアルでは、プロジェクト名は `objstoredemo` です。
+. 新しいプロジェクトを作成するには、Anypoint Studio を開き、​*[File (ファイル)] > [New (新規)] > [Mule Project (Mule プロジェクト)]*​ をクリックします。このチュートリアルでは、プロジェクト名は ​`objstoredemo`​ です。
 . 次のようなアプリケーションを作成します。
 +
 image::osv2-studio-flow.png[]
 +
-. 「`http`」を検索し、HTTP コネクタをドラッグして Studio のキャンバスにドロップします。HTTP コネクタは、Object Store にキーと値を保存するために使用する curl コマンドをリスンします。
+. 「​`http`​」を検索し、HTTP コネクタをドラッグして Studio のキャンバスにドロップします。HTTP コネクタは、Object Store にキーと値を保存するために使用する curl コマンドをリスンします。
 +
-*[Connector Configuration (コネクタ設定)]* の右にある緑のプラスをクリックし、*[Global Element Properties (グローバル要素のプロパティ)]* 画面で、デフォルトの設定 (*[Host (ホスト)]* が `0.0.0.0`、*[Port (ポート)]* が `8081`) を受け入れ、*[OK]* をクリックします。
+​*[Connector Configuration (コネクタ設定)]*​ の右にある緑のプラスをクリックし、​*[Global Element Properties (グローバル要素のプロパティ)]*​ 画面で、デフォルトの設定 (​*[Host (ホスト)]*​ が ​`0.0.0.0`​、​*[Port (ポート)]*​ が ​`8081`​) を受け入れ、​*[OK]*​ をクリックします。
 +
 image::osv2-http-config.png[]
 +
-. [HTTP] プロパティ画面で、*[Path (パス)]* を「`/store`」、*[Allowed Methods (許可されるメソッド)]* を「`POST`」に設定します。
+. [HTTP] プロパティ画面で、​*[Path (パス)]*​ を「​`/store`​」、​*[Allowed Methods (許可されるメソッド)]*​ を「​`POST`​」に設定します。
 +
 image::osv2-http-properties.png[]
 +
-curl コマンドを送信するとき、URL で `/store` オプションを使用します。たとえば、`objstoredemo.cloudhub.io/store` のようにします。*[Allowed Methods (許可されるメソッド)]* 設定により、curl コマンドを使用するユーザが実行できる操作はオブジェクトストアへの情報の POST のみになります。
+curl コマンドを送信するとき、URL で ​`/store`​ オプションを使用します。たとえば、​`objstoredemo.cloudhub.io/store`​ のようにします。​*[Allowed Methods (許可されるメソッド)]*​ 設定により、curl コマンドを使用するユーザが実行できる操作はオブジェクトストアへの情報の POST のみになります。
 +
-. *[Object to String (オブジェクトから文字列)]* コンポーネントを見つけて Studio キャンバスに追加します。設定は必要ありません。このコンポーネントは、HTTP コネクタから受信した内容を文字列に変換します。
-. *[JSON to Object (JSON からオブジェクト)]* コンポーネントを見つけて Studio キャンバスに追加します。*[Return Class (リターンクラス)]* を「`java.util.Map`」に設定します。
+. ​*[Object to String (オブジェクトから文字列)]*​ コンポーネントを見つけて Studio キャンバスに追加します。設定は必要ありません。このコンポーネントは、HTTP コネクタから受信した内容を文字列に変換します。
+. ​*[JSON to Object (JSON からオブジェクト)]*​ コンポーネントを見つけて Studio キャンバスに追加します。​*[Return Class (リターンクラス)]*​ を「​`java.util.Map`​」に設定します。
 +
 image::osv2-json-to-object.png[]
 +
-. 「`objectstore`」を検索して、Object Store Connector を追加します。Object Store Connector がない場合は、
-<<Object Store Connector をインストールする>>の説明に従ってインストールします。
-. *[Connector Configuration (コネクタ設定)]* の右にある緑のプラス記号をクリックし、*[Global Element Properties (グローバル要素のプロパティ)]* 画面で、
-*[Partition (パーティション)]* でパーティション名を割り当てます(`mypartition` など)。
-[Object Store Reference (オブジェクトストア参照)] 項目を「`_defaultUserObjectStore`」に設定します。
+. 「​`objectstore`​」を検索して、Object Store Connector を追加します。Object Store Connector がない場合は、「​<<Object Store Connector をインストールする>>​」の説明に従ってインストールします。
+. ​*[Connector Configuration (コネクタ設定)]*​ の右にある緑のプラス記号をクリックし、​*[Global Element Properties (グローバル要素のプロパティ)]*​ 画面で、​*[Partition (パーティション)]*​ でパーティション名を割り当てます(​`mypartition`​ など)。
+[Object Store Reference (オブジェクトストア参照)] 項目を「​`_defaultUserObjectStore`​」に設定します。
 +
-*注意:* データを Object Store v2 に保存するには、次のように *[Object Store Reference (オブジェクトストア参照)]* 項目を「`_defaultUserObjectStore`」に設定する必要があります。
+​*注意:*​ データを Object Store v2 に保存するには、次のように ​*[Object Store Reference (オブジェクトストア参照)]*​ 項目を「​`_defaultUserObjectStore`​」に設定する必要があります。
 +
-image::os-studio-gep-settings.png[Studio Global Element Property settings]
+image::os-studio-gep-settings.png[Studio の グローバル要素のプロパティ設定]
 +
-残りの設定は空白のままにし、*[OK]* をクリックします。
+残りの設定は空白のままにし、​*[OK]*​ をクリックします。
 +
-. *[Operation (操作)]* を *[Store (保存)]* に設定し、次のように *Store (保存) 操作*値を設定します。
+. ​*[Operation (操作)]*​ を ​*[Store (保存)]*​ に設定し、次のように ​*Store (保存) 操作*​値を設定します。
 +
-	* *[Key (キー)]* を「`#[payload.key]`」に設定
-	* *[Value Reference (値参照)]* を「`#[payload.value]`」に設定
+	* ​*[Key (キー)]*​ を「​`#[payload.key]`​」に設定
+	* ​*[Value Reference (値参照)]*​ を「​`#[payload.value]`​」に設定
 +
 image::osv2-connector.png[]
 +
-. *[Set Payload (ペイロードを設定)]* を見つけて追加します。*[Value (値)]* 項目を「`KEY: #[payload.key] AND VALUE: #[payload.value] WERE SAVED OK`」に設定します。このメッセージはコマンドラインに表示され、curl コマンドの値がアプリケーションで受信されたことを知らせます。
+. ​*[Set Payload (ペイロードを設定)]*​ を見つけて追加します。​*[Value (値)]*​ 項目を「​`KEY: #[payload.key] AND VALUE: #[payload.value] WERE SAVED OK`​」に設定します。このメッセージはコマンドラインに表示され、curl コマンドの値がアプリケーションで受信されたことを知らせます。
 +
 image::osv2-set-payload.png[]
 +
-. アプリケーションを保存し、*[Run (実行)] > [Run As (別のユーザとして実行)] > [Mule Application (Mule アプリケーション)]* をクリックします。アプリケーションを実行して、アプリケーションが正しく動作することを確認します。修正が必要な場合は、ここで行います。アプリケーションが正常に実行されたら、停止してかまいません。
+. アプリケーションを保存し、​*[Run (実行)] > [Run As (別のユーザとして実行)] > [Mule Application (Mule アプリケーション)]*​ をクリックします。アプリケーションを実行して、アプリケーションが正しく動作することを確認します。修正が必要な場合は、ここで行います。アプリケーションが正常に実行されたら、停止してかまいません。
 
 === Anypoint Platform にアプリケーションをデプロイする
 
-. Studio の Package Explorer でアプリケーションの名前を右クリックし、*[Anypoint Platform] > [Deploy to Cloud (クラウドにデプロイ)]* をクリックします。
-. ユーザログインウィンドウで、Anypoint Platform のユーザ名とパスワードを指定し、*[Sign In (サインイン)]* をクリックします。Anypoint Platform のログイン情報がない場合は、*[Sign Up (サインアップ)]* をクリックします。
-. Runtime Manager で、アプリケーション名を指定します。名前はそれぞれ一意で、Runtime Manager でアプリケーションが保存される URL になります。URL の形式は `APPLICATION_NAME.cloudhub.io` で、アプリケーションは cloudhub.io 名前空間に存在します。アプリケーション名に、命名方法が適切で一意であることを示す緑のチェックマークが表示されたことを確認します。
+. Studio の Package Explorer でアプリケーションの名前を右クリックし、​*[Anypoint Platform] > [Deploy to Cloud (クラウドにデプロイ)]*​ をクリックします。
+. ユーザログインウィンドウで、Anypoint Platform のユーザ名とパスワードを指定し、​*[Sign In (サインイン)]*​ をクリックします。Anypoint Platform のログイン情報がない場合は、​*[Sign Up (サインアップ)]*​ をクリックします。
+. Runtime Manager で、アプリケーション名を指定します。名前はそれぞれ一意で、Runtime Manager でアプリケーションが保存される URL になります。URL の形式は ​`APPLICATION_NAME.cloudhub.io`​ で、アプリケーションは cloudhub.io 名前空間に存在します。アプリケーション名に、命名方法が適切で一意であることを示す緑のチェックマークが表示されたことを確認します。
 +
-メッセージ *「You do not have permission to deploy new applications in this environment.  Please select an existing application to redeploy」*(この環境に新しいアプリケーションをデプロイする権限がありません。既存のアプリケーションを選択して再デプロイしてください) が表示されたら、Runtime Manager 表示の左上にある環境ボタンをクリックして環境を *[Design (設計)]* から *[Production (本番)]* に変更します。
+メッセージ​*「You do not have permission to deploy new applications in this environment.  Please select an existing application to redeploy」*​(この環境に新しいアプリケーションをデプロイする権限がありません。既存のアプリケーションを選択して再デプロイしてください) が表示されたら、Runtime Manager 表示の左上にある環境ボタンをクリックして環境を ​*[Design (設計)]*​ から ​*[Production (本番)]*​ に変更します。
 +
-. *[Runtime version (ランタイムバージョン)]* を Mule 3.8.5 以降か、任意の Mule 4.x バージョンに設定します。Runtime Manager に *[Use Object Store v2 (Object Store v2 を使用)]* チェックボックスが表示されていることを確認します。
-. *[Use Object Store v2 (Object Store v2 を使用)]* チェックボックスをオンにします。
+. ​*[Runtime version (ランタイムバージョン)]*​ を Mule 3.8.5 以降か、任意の Mule 4.x バージョンに設定します。Runtime Manager に ​*[Use Object Store v2 (Object Store v2 を使用)]*​ チェックボックスが表示されていることを確認します。
+. ​*[Use Object Store v2 (Object Store v2 を使用)]*​ チェックボックスをオンにします。
 +
 image::osv2-runtime-manager-deploy-app.png[osv2-runtime_manager_deploy_app]
 +
-. アプリケーションを設定したら、*[Deploy Application (アプリケーションをデプロイ)]* をクリックします。
+. アプリケーションを設定したら、​*[Deploy Application (アプリケーションをデプロイ)]*​ をクリックします。
 . Runtime Manager のデプロイウィンドウで、アプリケーションが CloudHub に正常にデプロイされたことを示すメッセージが表示されるまで待ちます。
-. *[Open in Browser and Close Window (ブラウザで開き、ウィンドウを閉じる)]* をクリックします。
+. ​*[Open in Browser and Close Window (ブラウザで開き、ウィンドウを閉じる)]*​ をクリックします。
 . Runtime Manager で、アプリケーションのエントリの右側をクリックし、その詳細を表示します。
-. *[Manage Application (アプリケーションを管理)]* をクリックします。アプリケーションの設定画面で、左側のナビゲーション領域に [Object Store] 
-が表示されます。以前の表示ラベル *[Application Data (アプリケーションデータ)]* が *[Object Store for OSv2]* に変更されています。
+. ​*[Manage Application (アプリケーションを管理)]*​ をクリックします。アプリケーションの設定画面で、左側のナビゲーション領域に [Object Store] が表示されます。以前の表示ラベル ​*[Application Data (アプリケーションデータ)]*​ が ​*[Object Store for OSv2]*​ に変更されています。
 
 == オブジェクトストアにデータを送信する
 
@@ -390,15 +377,15 @@ curl を使用する例
 curl -X POST -H "Content-Type: application/json" -d '{ "key": "TestKey01", "value": "This is an object store test" }' "http://APPLICATION_NAME.cloudhub.io/store"
 ----
 
-`APPLICATION_NAME` をアプリケーションをデプロイしたときに選択した名前に変更します。このコマンドを送信するたびに、キーの名前を変更して各キーが一意になるようにします。
+​`APPLICATION_NAME`​ をアプリケーションをデプロイしたときに選択した名前に変更します。このコマンドを送信するたびに、キーの名前を変更して各キーが一意になるようにします。
 
 == オブジェクトストアのデータを表示する
 
 オブジェクトストアのデータを表示するには、次の手順を実行します。
 
-. Anypoint Platform にログインし、*[Runtime Manager]* をクリックします。
+. Anypoint Platform にログインし、​*[Runtime Manager]*​ をクリックします。
 . アプリケーションの名前をクリックしてそのダッシュボードを表示します。
-. 左のナビゲーションバーから *[Object Store]* をクリックします。
+. 左のナビゲーションバーから ​*[Object Store]*​ をクリックします。
 +
 image::osv2-in-nav-bar.png[]
 +
@@ -406,19 +393,18 @@ Object Store ユーザインターフェースが次のように表示されま�
 +
 image::osv2-ui.png[]
 +
-* デフォルトのオブジェクトストア名は `DEFAULT_USER_STORE` です。
+* デフォルトのオブジェクトストア名は ​`DEFAULT_USER_STORE`​ です。
 * 各列に、オブジェクトストア名、パーティション名、キー、キーデータが表示されます。パーティションでオブジェクトストアのキーがグループ化されます。
 +
 . オブジェクトストア名、パーティション名、およびキーをクリックして各項目の値を表示します。
-. キーを削除するには、キー名にカーソルを置き、ゴミ箱アイコンをクリックします。同様に、
-パーティションやストア自体もその上にカーソルを置き、ゴミ箱アイコンをクリックすれば削除できます。
+. キーを削除するには、キー名にカーソルを置き、ゴミ箱アイコンをクリックします。同様に、パーティションやストア自体もその上にマウスポインタを置き、ゴミ箱アイコンをクリックすれば削除できます。
 
-*注意:* Object Store v2 では、存続期間 (TTL) が最長 30 日間の永続的なオブジェクトストレージが提供されます。
+​*注意:*​ Object Store v2 では、存続期間 (TTL) が最長 30 日間の永続的なオブジェクトストレージが提供されます。
 
 == 関連資料
 
-* xref:index.adoc[Object Store に関するドキュメント]
-* xref:osv2-faq.adoc#how-long-can-data-persist-in-osv2[Object Store v2 でのデータ存続期間は?]
-* xref:3.9@mule-runtime::object-store-connector.adoc[Object Store Connector ガイド]
-* xref:release-notes::object-store/objectstore-release-notes.adoc[リリースノート]
-* https://mulesoft.github.io/objectstore-connector/[Object Store テクニカルリファレンス]
+* xref:osv2-faq.adoc#how-long-can-data-persist-in-object-store-v2[Object Store v2 でのデータ存続期間は?]
+* xref:connectors::object-store/object-store-connector.adoc[Object Store Connector - Mule 4]
+* xref:release-notes::connector/object-store-connector-release-notes-mule-4.adoc[Object Store Connector Release Notes - Mule 4 (Object Store Connector リリースノート - Mule 4)]
+* xref:3.9@mule-runtime::object-store-connector.adoc[Object Store Connector - Mule 3]
+* xref:release-notes::object-store/objectstore-release-notes.adoc[Object Store Connector Release Notes - Mule 3 (Object Store Connector リリースノート - Mule 3)]

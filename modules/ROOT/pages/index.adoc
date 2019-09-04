@@ -2,52 +2,58 @@
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
+:imagesdir: ../assets/images/
 
-Object Store v2 では、1 つのアプリケーション内から、あらゆるバッチプロセスや Mule コンポーネントにわたってデータと状態を保存できます。Object Store v2 は、Mule 3 と Mule 4 のオブジェクトストアアクセスでバックエンドとして機能し、アプリケーションによるオブジェクトストアの直接読み書き、REST API の使用、Object Store Connector を使用した読み書きを可能にします。Object Store に関する情報は、xref:osv2-faq.adoc[FAQ] を参照してください。
+Object Store v2 では、1 つの CloudHub アプリケーション内から、あらゆるバッチプロセスや Mule コンポーネントおよびアプリケーションにわたってデータと状態を保存できます。
+
+デプロイメント時に Runtime Manager の ​*[Object Store V2]*​ チェックボックスをオンにすることで、CloudHub で Mule 3 と Mule 4 の実装として Object Store v2 を選択できます。Object Store に関する情報は、​xref:osv2-faq.adoc[FAQ]​ を参照してください。
 
 image::osv2-architecture.png[width=300]
 
+オンプレミス Mule アプリケーションでは Object Store v2 を使用できません。
+
 Object Store v2 には、次のような特長があります。
 
-* 更新されない限り、30 日間存続する Object Store v2 キー。キーが更新された場合、有効期間はその時点から 30 日間にリセットされます。詳細は、xref:osv2-faq.adoc#how-long-can-data-persist-in-osv2[「Object Store v2 でのデータ存続期間は?」]を参照してください。
-* 無制限のキーをサポート。
-* Anypoint Platform に完全統合。
-* Object Store v2 HA は、サポート対象リージョンと各リージョン内の可用性ゾーンのすべてで使用可能。
-* Object Store v2 は、ワーカーと同じリージョン内に配置可能。たとえば、シンガポールのワーカーは、シンガポールでホストされている Object Store v2 を使用できます。
-* Mule アプリケーション用の Mule コネクタと外部アプリケーション用の REST インターフェース。
-* エンドツーエンドでセキュアなトランスポートとストレージ。Object Store v2 では、セキュアなトランスポートに TLS を使用します。
-* 保管時のデータは FIPS 140-2 準拠の暗号化標準を使用して保存。
-* 最大サイズ 10 MB の値を保存。
-* 確認可能なタイムアウトによりロールバック可能。
+* 更新されない限り、30 日間存続する Object Store v2 キー。キーが更新された場合、存続期間 (TTL) は 30 日間延長されます。詳細は、​xref:osv2-faq.adoc#how-long-can-data-persist-in-object-store-v2[「Object Store v2 でのデータ存続期間は?」]​を参照してください。
 
-オブジェクトストアにデータを書き出すアプリケーションを既存の Object Store Connector を使用して作成できます。
+* 無制限のエントリ数。v2 object-store の合計サイズに制限はありません。
+* 最大サイズ 10 MB (Base64 エンコードの場合) の値を保存。ペイロードの base64 サイズは CEILING(base10size ​* 1024/3)*​ 4で見積もることができます。ここで、base10size はオブジェクトサイズのバイト数です。
+たとえば、base10 ペイロードサイズが 7.5 MB の場合、base64 では 10.24 MB に変換されます。
++
+* サポート対象リージョンと各リージョン内の可用性ゾーンのすべてで使用可能。
+* ワーカーと同じリージョンに存在。たとえば、シンガポールでホストされているワーカーは、シンガポールでホストされている Object Store v2 を使用します。
+* 外部アプリケーションがアクセスするための Mule コネクタと REST インターフェースを提供。
+* エンドツーエンドでセキュアな TLS トランスポートを提供。
+* 永続的ストレージを FIPS 140-2 準拠の標準を使用して暗号化。
 
-Object Store v2 にはユーザインターフェースが含まれており、[Anypoint Platform] > [Runtime Manager] で使用できます。
+
+v1 または v2 のいずれを使用していても、既存の Object Store Connector を使用してオブジェクトストアに書き込むことができます。
+
+Object Store v2 のユーザインターフェースは、[Anypoint Platform] > [Runtime Manager] で使用できます。
 
 == Object Store v2 へのアップグレード
 
 * 現在のオブジェクトストアのデータすべてをバックアップします。
 +
-IMPORTANT: データは Object Store v1 から v2 に引き継がれません。  Object Store v1 内にあるデータは、透かしやその他の Mule コンポーネントの状態を含め、v2 に移行されません。OSv1 に戻すと、OSv1 データは以前のまま残っています。
+IMPORTANT: データは Object Store v1 から v2 に引き継がれません。  Object Store v1 内にあるデータは、透かしやその他の Mule コンポーネントの状態を含め、v2 に移行されません。Object Store v1 に戻すと、Object Store v1 データは以前のまま残っています。
 +
-* Object Store v2 にアクセスするには、Anypoint Platform で *[Runtime Manager]* をクリックします。アプリケーションの名前をクリックしてそのダッシュボードを表示し、*[Manage Application (アプリケーションを管理)]* をクリックします。*[Settings (設定)]* 画面で、*[Use Object Store v2 (Object Store v2 を使用)]* をクリックします。プロンプトを受け入れます。Runtime Manager のダッシュボードで、*[Application Data (アプリケーションデータ)]* セクションが *[Object Store]* に変わります。
+* Object Store v2 にアクセスするには、Anypoint Platform で ​*[Runtime Manager]*​ をクリックします。アプリケーションの名前をクリックしてそのダッシュボードを表示し、​*[Manage Application (アプリケーションを管理)]*​ をクリックします。​*[Settings (設定)]*​ 画面で、​*[Use Object Store v2 (Object Store v2 を使用)]*​ をクリックします。プロンプトを受け入れます。Runtime Manager のダッシュボードで、​*[Application Data (アプリケーションデータ)]*​ セクションが ​*[Object Store]*​ に変わります。
 +
-image::os-use-object-store-v2.png[Click Use Object Store V2 in the Runtime Manager]
+image::os-use-object-store-v2.png[Runtime Manager で [Use Object Store v2 (Object Store v2 を使用)] をオンにします。]
 
 == Object Store に関するメモ
 
-* Object Store v2 リージョンをどこで使用できるかは、FAQ の xref:osv2-faq.adoc#where-is-osv2-available[「Object Store v2 を使用できるリージョンは?」]を参照してください。
+* Object Store v2 リージョンをどこで使用できるかは、​xref:osv2-faq.adoc#where-is-object-store-v2-available[「Object Store v2 を使用できるリージョンは?」]​を参照してください。
 * Object Store Connector は Object Store バージョン 1 と 2 の両方で動作します。
 * Object Store v2 では、作成時から最長 30 日間のデータ存続期間が適用されます。
 * Object Store v2 プレミアム SKU を購入していないアカウントは、アプリケーションあたり 10 TPS (トランザクション/秒) のレートに制限されます。基本となる 10 TPS のレート制限を超える場合は、MuleSoft アカウントチームまでお問い合わせください。
-* Mule 4 では、Object Store v2 で `_defaultPersistentObjectStore` オブジェクトストアが上書きされます。それ以上の設定は必要ありません。
-使用するコネクタまたはコンポーネントがそのオブジェクトストアを使用している場合、Object Store v2 へのアクセス権がユーザに付与されます。
+* Mule 4 を使用する CloudHub アプリケーションでは、Object Store v2 を選択すると、Object Store v2 で ​`_defaultPersistentObjectStore`​ オブジェクトストアが上書きされます。
 +
-Mule 3 では、Object Store v2 で `_defaultUserObjectStore` オブジェクトストアが上書きされます。Mule 3 Object Store Connector の場合、データを Object Store v2 に保存するには、[Object Store Reference (オブジェクトストア参照)] 項目を「`_defaultUserObjectStore`」に設定する必要があります。
+Mule 3 を使用する CloudHub アプリケーションでは、Object Store v2 で ​`_defaultUserObjectStore`​ オブジェクトストアが上書きされます。Mule 3 CloudHub アプリケーションで Object Store v2 を使用するには、[Object Store Reference (オブジェクトストア参照)] 項目の値を「​`_defaultUserObjectStore`​」に設定します。
 
-== 関連資料
+== 関連情報
 
-* xref:osv2-faq.adoc[Object Store に関する FAQ]
+* xref:osv2-faq.adoc[Object Store v2 に関する FAQ]
 * xref:release-notes::object-store/anypoint-osv2-release-notes.adoc[Object Store v2 Release Notes (Object Store v2 リリースノート)]
 * xref:osv2-guide.adoc[Object Store v2 の使用]
 * xref:osv2-tutorial.adoc[チュートリアル: Object Store v2]

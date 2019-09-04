@@ -4,33 +4,31 @@ include::_attributes.adoc[]
 endif::[]
 :keywords: osv2, os2, object store, store, REST, API
 
-Anypoint Object Store v2 (Object Store v2) では、`key,list` 値の取得と保存ができる REST API が提供されます。
+Anypoint Object Store v2 (Object Store v2) では、​`key,list`​ 値の取得と保存ができる REST API が提供されます。
 
 オブジェクトストアは 1 つのアプリケーションと連動して一時的にアプリケーションデータを保存します。
 アクセスを認証するには、アプリケーションのクライアント ID とクライアントシークレットが必要です。Object Store では、これらは Anypoint Platform の Runtime Manager に表示されます。
 
-xref:osv2-faq.adoc#how-long-can-data-persist-in-osv2[「Object Store v2 でのデータ存続期間は?」]を参照してください。
+​xref:osv2-faq.adoc#how-long-can-data-persist-in-object-store-v2[「Object Store v2 でのデータ存続期間は?」]​を参照してください。1 回の GET 操作で取得できるキーの最大数は 25 です。
 
-1 回の GET 操作で取得できるキーの最大数は 25 です。
-
-<<アプリケーションのクライアント ID とクライアントシークレットを表示する>>を参照してください。
+「​<<アプリケーションのクライアント ID とクライアントシークレットを表示する>>​」を参照してください。
 
 == Object Store v2 の操作の概要
 
-Object Store Connector は `key,value` 形式で読み書きしますが、Object Store v2 API は `key,list` 値を読み書きします。
+Object Store Connector は ​`key,value`​ 形式で読み書きしますが、Object Store v2 API は ​`key,list`​ 値を読み書きします。
 
-*注意:* アプリケーションが REST インターフェースを使用してオブジェクトストアに書き込み、Mule 3 Object Store Connector を使用して同じキーから読み取る場合、この読み取りではリストの要素 0 の値しか取得できません。そのため、REST API を使用する場合は、オブジェクトストアの内容を読み書きするための API のみを使用してください。そうしないと、API を使用して書き込める先はインデックス 0 のみになります。この制限は、Mule 4 と Anypoint Platform Object Store Connector には適用されません。
+​*注意:*​ アプリケーションが REST インターフェースを使用してオブジェクトストアに書き込み、Mule 3 Object Store Connector を使用して同じキーから読み取る場合、この読み取りではリストの要素 0 の値しか取得できません。そのため、REST API を使用する場合は、オブジェクトストアの内容を読み書きするための API のみを使用してください。そうしないと、API を使用して書き込める先はインデックス 0 のみになります。この制限は、Mule 4 と Anypoint Platform Object Store Connector には適用されません。
 
 次の表では、Object Store REST API 操作を Object Store Connector 操作と比較しています。
 
 [%header,cols="20a,50a,30a"]
 |===
-|OSv2 API |OSv2 REST API 操作 |Object Store Connector 操作
+|Object Store v2 API |Object Store v2 REST API 操作 |Object Store Connector 操作
 
 |POST |
 
 * Object Store:
-** オブジェクトストの TTL (秒) - デフォルトでは TTL は 2,592,000 秒 (30 日間) です。xref:osv2-faq.adoc#how-long-can-data-persist-in-osv2[「Object Store v2 でのデータ存続期間は?」]を参照してください。
+** オブジェクトストの TTL (秒) - デフォルトでは TTL は 2,592,000 秒 (30 日間) です。​xref:osv2-faq.adoc#how-long-can-data-persist-in-object-store-v2[「Object Store v2 でのデータ存続期間は?」]​を参照してください。
 ** 永続性プロパティ。
 ** アプリケーションまたは環境ごとの使用制限。キーまたはサイズに基づいて制限するオプションやその適用方法を含みます。
 * キーおよびリスト (項目) 値。
@@ -52,7 +50,7 @@ Object Store Connector は `key,value` 形式で読み書きしますが、Objec
 * Put item as confirmable String (項目を確認可能な文字列として更新)
 * Put store (更新して保存)
 
-|Dual store (2 段階保存) *&#8224;* + Store (保存)
+|Dual store (2 段階保存) ​*&#8224;*​ + Store (保存)
 |DELETE |
 
 * Remove object store (オブジェクトストアを削除)
@@ -62,10 +60,10 @@ Object Store Connector は `key,value` 形式で読み書きしますが、Objec
 |Remove (削除)
 |===
 
-*&#8224;* Object Store Connector の Dual Store 操作は、キーで値を保存する操作と、その後に値でキーを保存する操作の 2 つで構成されます。Dual Store 操作は、OSv2 で 2 つの「Put item as String」(項目を文字列として更新) コールを実行して次の結果を得るのと同様に動作します。
+​*&#8224;*​ Object Store Connector の Dual Store 操作は、キーで値を保存する操作と、その後に値でキーを保存する操作の 2 つで構成されます。Dual Store 操作は、Object Store v2 で 2 つの「Put item as String」(項目を文字列として更新) コールを実行して次の結果を得るのと同様に動作します。
 
-. `objectStore.store(key, value);`
-. `objectStore.store(value, key);`
+. ​`objectStore.store(key, value);`​
+. ​`objectStore.store(value, key);`​
 
 == Object Store v2 API ワークフローの概要
 
@@ -80,46 +78,44 @@ Object Store v2 API には、次のようにアクセスします。
 == アプリケーションをデプロイする
 
 . Anypoint Platform にログインします。
-. *[Runtime Manager]* をクリックします。
-. 既存のアプリケーションがある場合は、それをクリックして、*[Manage Application (アプリケーションを管理)]* をクリックします。
+. ​*[Runtime Manager]*​ をクリックします。
+. 既存のアプリケーションがある場合は、それをクリックして、​*[Manage Application (アプリケーションを管理)]*​ をクリックします。
 +
-初めて使用する場合は、Anypoint Studio でアプリケーションを作成します。開発が終わったら、Package Explorer でプロジェクト名を右クリックし、*[Anypoint Platform] > [Deploy to Cloud (クラウドにデプロイ)]* をクリックします。
+初めて使用する場合は、Anypoint Studio でアプリケーションを作成します。開発が終わったら、Package Explorer でプロジェクト名を右クリックし、​*[Anypoint Platform] > [Deploy to Cloud (クラウドにデプロイ)]*​ をクリックします。
 +
-. Runtime Manager の *[Deploying Application (アプリケーションのデプロイ)]* メニューで、次の手順を実行します。
+. Runtime Manager の ​*[Deploying Application (アプリケーションのデプロイ)]*​ メニューで、次の手順を実行します。
 +
 .. アプリケーション名に赤い X が表示される場合は、名前を変更して名前の後に緑のチェックマークが表示されるようにします。
 +
 選択したアプリケーション名は、ユーザがアプリケーションにアクセスするときに使用されます。
-たとえば、アプリケーションに `mydemo` と名前を付けると、ユーザは `+http://mydemo.cloudhub.io/+` でアプリケーションにアクセスできます。
+たとえば、アプリケーションに ​`mydemo`​ と名前を付けると、ユーザは ​`+http://mydemo.cloudhub.io/+`​ でアプリケーションにアクセスできます。
 +
-.. *[Deployment Target (デプロイターゲット)]* 項目と *[Application File (アプリケーションファイル)]* 項目は無視します。Anypoint Studio
-によってこの情報は入力されます。
+.. ​*[Deployment Target (デプロイターゲット)]*​ 項目と ​*[Application File (アプリケーションファイル)]*​ 項目は無視します。Anypoint Studio によってこの情報は入力されます。
 .. 必要に応じて、ドロップダウンリストから Mule Runtime エンジンバージョン項目を変更します。
 .. 必要に応じて、ワーカーサイズ項目を変更します。
-.. *[Deploy Application (アプリケーションをデプロイ)]* をクリックします。
+.. ​*[Deploy Application (アプリケーションをデプロイ)]*​ をクリックします。
 
 == REST API にアクセスする
 
 オブジェクトストアにアクセスするために、Postman などのアプリケーションをセットアップします。
-次の手順で `access_token` 値を取得します。
+次の手順で ​`access_token`​ 値を取得します。
 
 . オブジェクトストアのアクセス URL を次のように設定します。 +
 `{{osBaseUrl}}/api/v1/organizations/:ORGANIZATION_ID/environments/:environmentId/stores/myTestStoreId/objects`
-. オブジェクトストアに対して値の保存や読み取りができるように、HTTP ヘッダーおよび本文でアプリケーションを
-設定します。
+. オブジェクトストアに対して値の保存や読み取りができるように、HTTP ヘッダーおよび本文でアプリケーションを設定します。
 . 操作をオブジェクトストア API に送信します。
 
 == アプリケーションのクライアント ID とクライアントシークレットを表示する
 
-Anypoint Platform アカウントの組織管理者は、*[Object Store]* メニューからアプリケーションのクライアント ID とクライアントシークレットを表示できます。
+Anypoint Platform アカウントの組織管理者は、​*[Object Store]*​ メニューからアプリケーションのクライアント ID とクライアントシークレットを表示できます。
 
 クライアント ID とクライアントシークレットは、Object Store v2 REST API で使用するためのアプリケーションの認証に必要です。
 
-. *[Anypoint Platform] > [Runtime Manager]* にログインします。
-. Object Store アクセス権のあるアプリケーションをクリックし、*[Manage Application (アプリケーションを管理)]* をクリックします。このアプリケーションが実行中か、デプロイされていないことがあります。
+. ​*[Anypoint Platform] > [Runtime Manager]*​ にログインします。
+. Object Store アクセス権のあるアプリケーションをクリックし、​*[Manage Application (アプリケーションを管理)]*​ をクリックします。このアプリケーションが実行中か、デプロイされていないことがあります。
 . アプリケーションがまだ Object Store v2 に関連付けられていない場合、チェックボックスをオンにして変更を適用します。
-. 左ナビゲーション領域の *[Object Store]* メニューをクリックし、*[Show Client Credentials (クライアントのログイン情報を表示)]* をクリックします。
-. *[Copy to Clipboard (クリップボードにコピー)]* アイコンをクリックし、クライアント ID またはクライアントシークレットの値を、REST API の認証に使用する curl アプリケーションに貼り付けます。
+. 左ナビゲーション領域の ​*[Object Store]*​ メニューをクリックし、​*[Show Client Credentials (クライアントのログイン情報を表示)]*​ をクリックします。
+. ​*[Copy to Clipboard (クリップボードにコピー)]*​ アイコンをクリックし、クライアント ID またはクライアントシークレットの値を、REST API の認証に使用する curl アプリケーションに貼り付けます。
 
 == ベアラトークンを表示する
 
@@ -133,7 +129,7 @@ curl -X POST \
   -d 'client_id=CLIENT_ID_VALUE&client_secret=CLIENT_SECRET_VALUE&grant_type=client_credentials'
 ----
 
-CLIENT_ID_VALUE と CLIENT_SECRET_VALUE をクライアント ID とクライアントシークレットに置き換えます。
+​CLIENT_ID_VALUE​ と ​CLIENT_SECRET_VALUE​ をクライアント ID とクライアントシークレットに置き換えます。
 
 出力は次のようになります。
 
@@ -149,19 +145,19 @@ CLIENT_ID_VALUE と CLIENT_SECRET_VALUE をクライアント ID とクライア
 
 次の手順では、アプリケーションがすでに作成されていて、Object Store v2 へのアクセス権が付与されていることを前提とします。
 
-*注意:* <<アプリケーションのクライアント ID とクライアントシークレットを表示する>>の説明に従ってクライアント ID とクライアントシークレットを取得します。
+​*注意:*​ 「​<<アプリケーションのクライアント ID とクライアントシークレットを表示する>>​」の説明に従ってクライアント ID とクライアントシークレットを取得します。
 
 === 環境 ID と組織 ID を取得する
 
-*[Access Management (アクセス管理)] > [Environments (環境)]* で、アプリケーションが存在する環境をクリックします。URL から環境 ID をコピーします。URL は次のようになっています。
+​*[Access Management (アクセス管理)] > [Environments (環境)]*​ で、アプリケーションが存在する環境をクリックします。URL から環境 ID をコピーします。URL は次のようになっています。
 
 `+https://anypoint.mulesoft.com/accounts/#/cs/core/environments/edit/badd09f00f004242badd0942+`
 
-*[Access Management (アクセス管理)] > [Organization (組織)]* で、*[Organization ID (組織 ID)]* をコピーします。
+​*[Access Management (アクセス管理)] > [Organization (組織)]*​ で、​*[Organization ID (組織 ID)]*​ をコピーします。
 
 === オブジェクトストアのリストを表示する
 
-`BEARER_ID` をベアラ ID、`ORG_ID` を組織 ID、`ENV_ID` を環境 ID に置き換えて次のコマンドを送信します。
+​`BEARER_ID`​ をベアラ ID、​`ORG_ID`​ を組織 ID、​`ENV_ID`​ を環境 ID に置き換えて次のコマンドを送信します。
 
 [source,console,linenums]
 ----
@@ -184,7 +180,7 @@ curl -X GET \
 
 == 関連資料
 
-* xref:connectors::object-store/object-store-connector.adoc[Mule 4 Object Store Connector のドキュメント]
+* xref:connectors::object-store/object-store-connector.adoc[Object Store Connector - Mule 4]
 * https://anypoint.mulesoft.com/apiplatform/repository/v2/organizations/68ef9520-24e9-4cf2-b2f5-620025690913/public/apis/16510/versions/17620/files/root[Object Store v2 - api.raml]
 * https://anypoint.mulesoft.com/exchange/portals/anypoint-platform/f1e97bc6-315a-4490-82a7-23abe036327a.anypoint-platform/object-store-v2/[Anypoint Exchange の Object Store v2]
-* xref:3.9@mule-runtime::object-store-connector.adoc[Object Store Connector]
+* xref:3.9@mule-runtime::object-store-connector.adoc[Object Store Connector - Mule 3]

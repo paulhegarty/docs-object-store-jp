@@ -5,25 +5,46 @@ endif::[]
 
 == Object Store v2 を使用できるリージョンは?
 
-Object Store v2 は、以下を含む、Runtime Manager アプリケーションをデプロイできるリージョンすべてで使用できます。
-
-APAC: 東京 (ap-northeast-1)、シンガポール (ap-southeast-1)、シドニー (ap-southeast-2)。 +
-EU: フランクフルト (eu-central-1) およびアイルランド (eu-west-1)。 +
-北米: カナダ中央部 (ca-central-1)、北バージニア (us-east-1)、オレゴン (us-west-2)。 +
-南米: サンパウロ (sa-east-1)。 +
-ロンドン (eu-west-2) も US クラウドからアクセスできますが、EU クラウドからはアクセスできません。
+Object Store v2 は、Runtime Manager (CloudHub) アプリケーションをデプロイできる​xref:runtime-manager::cloudhub-architecture.adoc#global-worker-clouds[リージョンすべて]​で使用できます。
 
 == Object Store v2 をサポートする Mule バージョンは?
 
-Mule 3.8.5 以上、およびすべての 4.x バージョン。 
+Mule 3.8.5 以上、およびすべての 4.x バージョン。
 
-NOTE: CloudHub にデプロイされた Mule Runtime のみが Object Store v2 を使用できます。
+[IMPORTANT]
+====
+
+* Mule 4 は Object Store v2 のみをサポートしています。
+* CloudHub にデプロイされた Mule Runtime のみが Object Store v2 を使用できます。
+
+====
+
+== サブスクリプションのトランザクション制限に達した場合はどうなりますか?
+
+Object Store v2 サブスクリプションパックによって、Anypoint Platform 組織に 1 か月あたり 1 億件のトランザクションが許可されます。この制限は、すべての本番環境と非本番環境に適用されます。
+https://anypoint.mulesoft.com/exchange/portals/anypoint-platform/f1e97bc6-315a-4490-82a7-23abe036327a.anypoint-platform/object-store-v2/[Object Store v2 REST API] を使用して使用状況を監視できます。
+
+トランザクション制限に達した場合、Object Store v2 は機能を継続し、MuleSoft 営業担当から組織に連絡が来て、プランを増やすことができます。
 
 == Object Store v2 はワーカーと同じリージョンで存続しますか?
 
 はい、Object Store v2 は、アプリケーションが最初にデプロイされた、ワーカーと同じリージョンにあります。たとえば、シンガポールリージョンにデプロイした場合、オブジェクトストアはシンガポールリージョンで存続します。
 
 IMPORTANT: 最初のデプロイの後、アプリケーションを別のリージョンに移動した場合、Object Store v2 はデータが失われないように元のリージョンに残ります。使用する Object Store v2 が別のリージョンに移動することはありません。アプリケーションとオブジェクトストアの両方を別のリージョンにデプロイする必要がある場合は、アプリケーションを削除してから新しいリージョンに再アップロードする必要があります。この操作により、ストレージに存在するデータはすべて失われます。
+
+== オブジェクトストアエントリは、どのようにワーカーに分割されますか?
+
+Object Store v2 は、CloudHub とは別個のリモートサービスです。​`_defaultUserObjectStore`​ に配置したすべてのエントリを、同じアプリケーションのすべてのワーカーが使用できます。​`_defaultUserObjectStore`​ を使用していない場合、データはワーカーのメモリ内オブジェクトストアに置かれ、ワーカーが再起動されたり、新しいアプリケーションバージョンがデプロイされたりするとデータは失われます。
+
+使用可能なエントリ数の例として、50 個のエントリと 5 つのワーカーがある場合、アプリケーション内のすべてのワーカーが 50 個のエントリすべてを使用でき、Object Store v2 サービスはワーカーに影響を及ぼさずにすべてのデータの保存を処理します。
+
+== Mule アプリケーションが別のアプリケーションのオブジェクトストアにアクセスする方法は?
+
+他の Mule アプリケーションがアプリケーションのオブジェクトストアにアクセスする必要がある場合、&#8203;https://anypoint.mulesoft.com/exchange/portals/anypoint-platform/f1e97bc6-315a-4490-82a7-23abe036327a.anypoint-platform/object-store-v2/[Object Store v2 REST API] を使用して 1 つのアプリケーションから読み取り、別のアプリケーションに保存します。
+
+== オブジェクトストアの制限は?
+
+オブジェクトストアの合計サイズに制限はありませんが、各値は 10 MB に制限されます。無料バージョンでも 1 秒あたり 10 件のトランザクションに使用が制限されます。プレミアムアドオンユーザは、最大 100 TPS まで使用できます。
 
 == Object Store v2 でのデータ存続期間は?
 
@@ -35,7 +56,7 @@ Object Store v2 では、アプリケーションごとのキー数に制限は�
 
 == Object Store v2 REST API ポータルの場所は?
 
-この API は、 https://anypoint.mulesoft.com/exchange/portals/anypoint-platform/f1e97bc6-315a-4490-82a7-23abe036327a.anypoint-platform/object-store-v2/[Anypoint Platform Developer のポータル]で使用できます。
+この API は、&#8203;https://anypoint.mulesoft.com/exchange/portals/anypoint-platform/f1e97bc6-315a-4490-82a7-23abe036327a.anypoint-platform/object-store-v2/[Anypoint Platform 開発者のポータル] で使用できます。
 
 == Object Store Connector の場所は?
 
@@ -47,7 +68,7 @@ Mule の Object Store Connector は、すべてのバージョンが Object Stor
 
 == Object Store の値がバイナリ形式である理由は?
 
-Runtime Manager で Object Store キーを表示すると、キーは `[binary value] BINARY` として表示されます。
+Runtime Manager で Object Store キーを表示すると、キーは ​`[binary value] BINARY`​ として表示されます。
 Mule 4 では、値を Mule オブジェクトでラップして、Anypoint Platform で値がバイナリでのみ表示されるようにします。バックグラウンドでは、Mule 4 が Mule 内部シリアライザでバイナリ逐次化を実行します。ユーザインターフェースではオブジェクトを非逐次化できないため、値がバイナリになったことのみが伝えられます。
 
 キー値を表示するには、アプリケーションのコネクタに次のような Object Store 取得フローが必要です。
@@ -65,37 +86,11 @@ Mule 4 では、値を Mule オブジェクトでラップして、Anypoint Plat
 </flow>
 ----
 
-詳細は、xref:osv2-tutorial.adoc#create-a-studio-7-project[「チュートリアル: Studio 7 プロジェクトを作成する」]を参照してください。
+詳細は、​xref:osv2-tutorial.adoc#create-a-studio-7-project[「チュートリアル: Studio 7 プロジェクトを作成する」]​を参照してください。
 
 == Object Store v2 にレート制限はありますか?
 
-Object Store SKU を別途購入していないお客様には、アプリケーションあたり 10 TPS (トランザクション/秒) というレート制限があります。  OSv2 SKU を購入していないアカウントでアプリケーションがレート制限を超えると、それ以降しばらくの間、要求は処理されず、429 HTTP エラー状況コードが返されます。基本となる 10 TPS のレート制限を超える場合は、MuleSoft アカウントチームまでお問い合わせください。
-
-== Object Store v2 はワーカー間で共有できますか?
-
-オブジェクトストアとその内容 (キー、値) には、オブジェクトを定義する (すなわち所有する) 1 つの Mule アプリケーションのすべての CloudHub ワーカーがアクセスできます。つまり、同じアプリケーションの CloudHub ワーカーである限り、オブジェクトストアを共有できます。
-
-他の Mule アプリケーションとその CloudHub ワーカーはこのオブジェクトストアとその内容にアクセスできません。ただし、REST API を使用すれば 1 つのアプリケーションから読み取り、別のアプリケーションに保存することはできます。
-
-////
-== Object Store では、複数の CloudHub ワーカーにまたがってキャッシュされたデータは複製されますか?
-
-Object Store v1 または v2 で保存されたデータは、1 つのアプリケーション内のすべての CloudHub ワーカーからアクセスできる別個のサービスに含まれており、ワーカー間で共有されます。Mule XML フローで `objectStore-ref="_defaultUserObjectStore"` を設定している場合、
-データは Object Store v2 にのみ保存されます。設定していない場合、オブジェクトストア参照は 1 つのワーカーのメモリ内に留まります。
-
-Mule 3 の XML フローの例:
-
-[source,xml,linenums]
-----
-<objectstore:config name="ObjectStore__Connector" partition="mypartition"
- objectStore-ref="_defaultUserObjectStore" doc:name="ObjectStore: Connector"/>
-----
-
-////
-
-== Object Store v2 はオンプレミスで使用できますか?
-
-いいえ、ただしオンプレミスで実行されるアプリケーションは Object Store v2 REST API を使用してデータを Object Store v2 に保存し、取得できます。
+Object Store SKU を別途購入していないお客様には、アプリケーションあたり 10 TPS (トランザクション/秒) というレート制限があります。  Object Store v2 SKU を購入していないアカウントでアプリケーションがレート制限を超えると、それ以降しばらくの間、要求は処理されず、429 HTTP エラー状況コードが返されます。基本となる 10 TPS のレート制限を超える場合は、MuleSoft アカウントチームまでお問い合わせください。
 
 == Object Store v2 データの保護方法は?
 
@@ -108,8 +103,7 @@ Object Store では読み書きのたびに I/O が行われます。Object Stor
 == 関連資料
 
 * https://anypoint.mulesoft.com/exchange/portals/anypoint-platform/f1e97bc6-315a-4490-82a7-23abe036327a.anypoint-platform/object-store-v2/[Anypoint Exchange Object Store v2]
-* https://www.anypoint.mulesoft.com/exchange/org.mule.modules/mule-module-objectstore/[Mule 3 Object Store Connector]
 * https://www.anypoint.mulesoft.com/exchange/org.mule.connectors/mule-objectstore-connector/[Mule 4 Object Store Connector]
-* xref:index.adoc[Object Store に関するドキュメント]
-* https://forums.mulesoft.com[MuleSoft フォーラム]
-* https://support.mulesoft.com/s/knowledge[知識ベース記事]
+* https://www.anypoint.mulesoft.com/exchange/org.mule.modules/mule-module-objectstore/[Object Store Connector - Mule 3]
+* https://forums.mulesoft.com/search.html?q=object+store[「Object Store」MuleSoft フォーラム]
+* https://support.mulesoft.com/s/global-search/%40uri#q=object%20store&t=AllResults[Object Store に関する知識ベース記事]

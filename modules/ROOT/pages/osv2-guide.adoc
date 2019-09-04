@@ -1,4 +1,4 @@
-= Object Store の使用
+= Object Store v2 の使用
 ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
@@ -7,7 +7,7 @@ Anypoint Object Store v2 (Object Store v2) を使用すると、1 つのアプ�
 
 Anypoint Platform の EU コントロールプレーンと Mule 4 では、Object Store v2 はデフォルトで有効になっています。
 
-Mule 3 では、*[Anypoint Platform] > [Runtime Manager]* で、Object Store v2 にアクセスするアプリケーションごとに Object Store v2 を有効にします。
+Mule 3 では、​*[Anypoint Platform] > [Runtime Manager]*​ で、Object Store v2 にアクセスするアプリケーションごとに Object Store v2 を有効にします。
 
 == コンポーネント
 
@@ -15,9 +15,9 @@ Object Store v2 は、次のコンポーネントとやりとりします。
 
 * Object Store Connector
 +
-Anypoint Studio で使用して、オブジェクトストアを読み書きするためのフローを作成します。Object Store Connector は、Anypoint Studio 内から Anypoint Exchange を使用してインストールできます。インストール後、Studio で「`objectstore`」を検索します。Object Store Connector は Object Store バージョン 1 と 2 の両方で動作します。Studio を使用してアプリケーションを作成し、Runtime Manager にデプロイします。アプリケーションは、Runtime Manager で実行され、オブジェクトストアに対する読み書き要求を実行します。
+Anypoint Studio で使用して、オブジェクトストアを読み書きするためのフローを作成します。Object Store Connector は、Anypoint Studio 内から Anypoint Exchange を使用してインストールできます。インストール後、Studio で「​`objectstore`​」を検索します。Object Store Connector は Object Store バージョン 1 と 2 の両方で動作します。Studio を使用してアプリケーションを作成し、Runtime Manager にデプロイします。アプリケーションは、Runtime Manager で実行され、オブジェクトストアに対する読み書き要求を実行します。
 +
-*注意:* データを Object Store v2 に表示するには、Object Store Connector の [Object Store Reference (オブジェクトストア参照)] 項目 (XML の objectStore-ref 要素) が `_defaultUserObjectStore` に設定されている必要があります。
+​*注意:*​ データを Object Store v2 に表示するには、Object Store Connector の [Object Store Reference (オブジェクトストア参照)] 項目 (XML の objectStore-ref 要素) が ​`_defaultUserObjectStore`​ に設定されている必要があります。
 +
 * REST API
 +
@@ -25,7 +25,7 @@ https://anypoint.mulesoft.com/exchange/portals/anypoint-platform/f1e97bc6-315a-4
 
 * Runtime Manager
 +
-Object Store v2 を有効にすると、*[Runtime Manager] > [Application Data (アプリケーションデータ)]* 設定の表示ラベルが *[Object Store]* に変わります。[Object Store] インターフェースから、オブジェクトストアのオブジェクトとその値を管理できます。このインターフェースでは、オブジェクトストアのオブジェクトを削除することもできます。
+Object Store v2 を有効にすると、​*[Runtime Manager] > [Application Data (アプリケーションデータ)]*​ 設定の表示ラベルが ​*[Object Store]*​ に変わります。[Object Store] インターフェースから、オブジェクトストアのオブジェクトとその値を管理できます。このインターフェースでは、オブジェクトストアのオブジェクトを削除することもできます。
 
 === オブジェクトストアデータの保護について
 
@@ -40,49 +40,49 @@ Object Store v2 では、セキュアなトランスポートに TLS を使用�
 
 == アプリケーション で Object Store Connector を使用する
 
-*注意:* 次の情報は Mule 3 にのみ適用されます。
+​*注意:*​ 次の情報は Mule 3 にのみ適用されます。
 
-. Anypoint Studio で、*[File (ファイル)] > [New (新規)] > [Mule Project (Mule プロジェクト)]* をクリックします。
+. Anypoint Studio で、​*[File (ファイル)] > [New (新規)] > [Mule Project (Mule プロジェクト)]*​ をクリックします。
 . 次のような簡単なフローを作成します。
 +
 [%headers,cols="25a,75a"]
 |===
-|構成要素 |*パラメータ*
-|HTTP connector (HTTP コネクタ) |緑のプラス記号 + をクリックします。
-*Host (ホスト)* = `All interfaces [0.0.0.0] (Default)` +
-*Port (ポート)* = `8081` +
-*[OK]* をクリックします。 +
-*Path (パス)* = `/store` +
-*Allowed Methods (許可されるメソッド)* = `POST`
+|構成要素 |​*パラメータ*​
+|HTTP コネクタ | 緑のプラス記号をクリックします。 +
+​*Host (ホスト)*​ = ​`All interfaces [0.0.0.0] (Default)`​ +
+​*Port (ポート)*​ = ​`8081`​ +
+​*[OK]*​ をクリックします。 +
+​*Path (パス)*​ = ​`/store`​ +
+​*Allowed Methods (許可されるメソッド)*​ = ​`POST`​
 |Object to String (オブジェクトから文字列) |設定なし (デフォルトを使用)
-|JSON to Object (JSON からオブジェクト) | Return Class (リターンクラス) = `java.util.Map`
-|Object Store Connector |緑のプラス記号  + をクリックします。
-*[Partition (パーティション)]* 項目を設定します。 +
-*[Object Store Reference (オブジェクトストア参照)]* 項目を「`_defaultUserObjectStore`」に設定します。これは、データを Object Store v2 に保存するためには必須です。 +
-*[OK]* をクリックします。 +
-*Operation (操作)* = *Store* (保存) に設定します。 +
-*Key (キー)* = `&#x0023;[payload.key]` +
-*Value Reference (値の参照)* = `&#x0023;[payload.value]`
-|Set Payload (ペイロードを設定) |*Settings (設定)* = `KEY: &#x0023;[payload.key] AND VALUE: &#x0023;[payload.value] WERE SAVED OK`
+|JSON to Object (JSON からオブジェクト) | Return Class (リターンクラス) = ​`java.util.Map`​
+|Object Store Connector | 緑のプラス記号をクリックします。 +
+​*[Partition (パーティション)]*​ 項目を設定します。 +
+​*[Object Store Reference (オブジェクトストア参照)]*​ 項目を「​`_defaultUserObjectStore`​」に設定します。これは、データを Object Store v2 に保存するためには必須です。 +
+​*[OK]*​ をクリックします。 +
+​*Operation (操作)*​ = ​*Store*​ (保存) に設定します。 +
+​*Key (キー)*​ = ​`&#x0023;[payload.key]`​ +
+​*Value Reference (値の参照)*​ = ​`&#x0023;[payload.value]`​
+|Set Payload |​*Settings (設定)*​ = ​`KEY: &#x0023;[payload.key] AND VALUE: &#x0023;[payload.value] WERE SAVED OK`​
 |===
 +
 完了すると、フローが表示されます。
 +
 image::osv2-studio-flow.png[]
 +
-. アプリケーションを保存します。アプリケーションをテスト実行して、動作することを確認します。キャンバスを右クリックし、*[Run project <name> (プロジェクト <名前>) を実行]* をクリックします。アプリケーションが正常に開始したら、停止してかまいません。キャンバスを右クリックし、*[Stop project <name> (プロジェクト <名前>) を停止]* をクリックします。
-. Anypoint Studio の Package Explorer でアプリケーションの名前を右クリックし、*[Anypoint Platform] > [Deploy to Cloud (クラウドにデプロイ)]* をクリックします。
-. ユーザログインウィンドウで、Anypoint Platform のユーザ名とパスワードを指定し、*[Sign In (サインイン)]* をクリックします。Anypoint Platform のログイン情報がない場合は、*[Sign Up (サインアップ)]* をクリックします。
+. アプリケーションを保存します。アプリケーションをテスト実行して、動作することを確認します。キャンバスを右クリックし、​*[Run project <name> (プロジェクト <名前>) を実行]*​ をクリックします。アプリケーションが正常に開始したら、停止してかまいません。キャンバスを右クリックし、​*[Stop project <name> (プロジェクト <名前>) を停止]*​ をクリックします。
+. Anypoint Studio の Package Explorer でアプリケーションの名前を右クリックし、​*[Anypoint Platform] > [Deploy to Cloud (クラウドにデプロイ)]*​ をクリックします。
+. ユーザログインウィンドウで、Anypoint Platform のユーザ名とパスワードを指定し、​*[Sign In (サインイン)]*​ をクリックします。Anypoint Platform のログイン情報がない場合は、​*[Sign Up (サインアップ)]*​ をクリックします。
 . Runtime Manager で、次の手順を実行します。
 +
-** アプリケーションの名前を指定します。名前はそれぞれ一意で、Runtime Manager でアプリケーションが保存される URL になります。URL の形式は `<application_name>.cloudhub.io` です。アプリケーション名に、命名方法が適切で一意であることを示す緑のチェックマークが表示されたことを確認します。
+** アプリケーションの名前を指定します。名前はそれぞれ一意で、Runtime Manager でアプリケーションが保存される URL になります。URL の形式は ​`<application_name>.cloudhub.io`​ です。アプリケーション名に、命名方法が適切で一意であることを示す緑のチェックマークが表示されたことを確認します。
 ** [Runtime version (ランタイムバージョン)] を Mule 3.8.5 以降か、任意の Mule 4.x バージョンに設定します。
 ** [Use Object Store v2 (Object Store v2 を使用)] チェックボックスをオンにします。
 . アプリケーションを設定したら、[Deploy Application (アプリケーションをデプロイ)] をクリックします。
 . Runtime Manager から、この選択内容を確認するプロンプトが表示されます。
 . アプリケーションを開始します。
 
-画面の左側にある Runtime Manager ナビゲーションバーの *[Application Data (アプリケーションデータ)]* 表示ラベルが *[Object Store]* に変わります。
+画面の左側にある Runtime Manager ナビゲーションバーの ​*[Application Data (アプリケーションデータ)]*​ 表示ラベルが ​*[Object Store]*​ に変わります。
 
 
 == オブジェクトストアにデータを送信する
@@ -97,15 +97,15 @@ Windows の場合、Postman、curl、または cygwin を使用できます。
 curl -X POST -H "Content-Type: application/json" -d '{ "key": "TestKey01", "value": "This is an object store test" }' "http://application_name.cloudhub.io/store"
 ----
 
-`application_name` をアプリケーションをデプロイしたときに選択した名前に変更します。このコマンドを送信するたびに、キーの名前を変更して各キーが一意になるようにします。
+​`application_name`​ をアプリケーションをデプロイしたときに選択した名前に変更します。このコマンドを送信するたびに、キーの名前を変更して各キーが一意になるようにします。
 
 == オブジェクトストアのデータを表示する
 
 オブジェクトストアのデータを表示する手順は、次のとおりです。
 
-. Anypoint Platform にログインし、*[Runtime Manager]* をクリックします。
+. Anypoint Platform にログインし、​*[Runtime Manager]*​ をクリックします。
 . アプリケーションの名前をクリックしてそのアプリケーションのダッシュボードを表示します。
-. 左のナビゲーションバーから *[Object Store]* をクリックします。
+. 左のナビゲーションバーから ​*[Object Store]*​ をクリックします。
 +
 image::osv2-in-nav-bar.png[]
 +
@@ -113,17 +113,16 @@ Object Store ユーザインターフェースが次のように表示されま�
 +
 image::osv2-ui.png[]
 +
-* デフォルトのオブジェクトストア名は `DEFAULT_USER_STORE` です。
+* デフォルトのオブジェクトストア名は ​`DEFAULT_USER_STORE`​ です。
 * 各列に、オブジェクトストア名、パーティション名、キー、キーデータが表示されます。パーティションでオブジェクトストアのキーがグループ化されます。
 +
 . オブジェクトストア名、パーティション名、およびキーをクリックしてその値を表示します。
-. キーを削除するには、キー名にカーソルを置き、ゴミ箱アイコンをクリックします。同様に、
-パーティションやストア自体もその上にカーソルを置き、ゴミ箱アイコンをクリックすれば削除できます。
+. キーを削除するには、キー名にカーソルを置き、ゴミ箱アイコンをクリックします。同様に、パーティションやストア自体もその上にマウスポインタを置き、ゴミ箱アイコンをクリックすれば削除できます。
 
-*注意:* Object Store では、存続期間 (TTL) が 30 日間の永続的なオブジェクトストレージが提供されます。
+​*注意:*​ Object Store では、存続期間 (TTL) が 30 日間の永続的なオブジェクトストレージが提供されます。
 
 == 関連資料
 
-* xref:osv2-faq.adoc#how-long-can-data-persist-in-osv2[Object Store v2 でのデータ存続期間は?]
+* xref:osv2-faq.adoc#how-long-can-data-persist-in-object-store-v2[Object Store v2 でのデータ存続期間は?]
 * xref:osv2-apis.adoc[Object Store v2 に関する FAQ]
 * xref:release-notes::object-store/anypoint-osv2-release-notes.adoc[Object Store v2 Release Notes (Object Store v2 リリースノート)]
